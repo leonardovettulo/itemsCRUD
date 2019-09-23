@@ -5,7 +5,7 @@ import { ItemsComponent } from "./pages/items/items.component";
 
 const routes: Routes = [
   { path: "items", component: ItemsComponent },
-  { path: "item", component: ItemComponent },
+  { path: "item/:id", component: ItemComponent },
   { path: "**", pathMatch: "full", redirectTo: "items" }
 ];
 

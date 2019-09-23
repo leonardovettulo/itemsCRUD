@@ -1,1 +1,48 @@
-<p>items works!</p>
+<h1>Item List</h1>
+
+<div class="row">
+    <div class="col">
+        <button routerLink="/item/new" class="btn btn-info mb-2">
+            <i class="fa fa-plus"></i> Add
+        </button>
+    </div>
+</div>
+
+<table class="table table-borderless">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Detail</th>
+            <th scope="col">Done</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<div class="alert alert-warning text-center mt-3">
+    <h4 class="alert-heading">There are no items</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+</div>
+
+<div class="alert alert-info text-center mt-3">
+    <h4 class="alert-heading">Loading</h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Wait please
+    </p>
+</div>

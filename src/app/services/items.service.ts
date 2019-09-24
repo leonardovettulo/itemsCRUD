@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { ItemModel } from "../models/item.model";
-import { map } from "rxjs/operators";
+import { map, delay } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -28,11 +28,18 @@ export class ItemsService {
   }
 
   getItems() {
-    return this.http.get(`${this.url}/items.json`).pipe(map(this.createArray));
+    return this.http.get(`${this.url}/items.json`).pipe(
+      map(this.createArray) //,
+      //delay(1500) //Testing for delay
+    );
   }
 
   getItem(id: string) {
     return this.http.get(`${this.url}/items/${id}.json`);
+  }
+
+  deleteItem(id: string) {
+    return this.http.delete(`${this.url}/items/${id}.json`);
   }
 
   private createArray(obj: object) {

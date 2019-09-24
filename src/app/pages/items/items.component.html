@@ -8,7 +8,7 @@
     </div>
 </div>
 
-<table class="table table-borderless">
+<table *ngIf="!loading && items.length !== 0" class="table table-borderless">
     <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
@@ -29,7 +29,7 @@
                 <button [routerLink]="['/item', item.id]" class="btn btn-info mr-1">
     <i class="fa fa-pen"></i>
 </button>
-                <button class="btn btn-info">
+                <button (click)="deleteItem(item, i )" class="btn btn-info">
         <i class="fa fa-trash"></i>
     </button>
             </td>
@@ -39,14 +39,14 @@
     </tbody>
 </table>
 
-<div class="alert alert-warning text-center mt-3">
+<div *ngIf="!loading && items.length === 0" class="alert alert-warning text-center mt-3  animated fade-in fast">
     <h4 class="alert-heading">There are no items</h4>
     <p>
         <i class="fa fa-exclamation fa-2x"></i>
     </p>
 </div>
 
-<div class="alert alert-info text-center mt-3">
+<div *ngIf="loading" class="alert alert-info text-center mt-3 animated fade-in fast">
     <h4 class="alert-heading">Loading</h4>
     <p>
         <i class="fa fa-sync-alt fa-spin fa-2x"></i>

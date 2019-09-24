@@ -1,6 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ItemModel } from "../../models/item.model";
 import { NgForm } from "@angular/forms";
+import { ItemsService } from "../../services/items.service";
+import swal from "sweetalert2";
+import { Observable } from "rxjs";
+
+//Sweet Alert package
 
 @Component({
   selector: "app-item",
@@ -10,16 +15,36 @@ import { NgForm } from "@angular/forms";
 export class ItemComponent implements OnInit {
   item = new ItemModel();
 
-  constructor() {}
+  constructor(private itemsService: ItemsService) {}
 
   ngOnInit() {}
 
   save(form: NgForm) {
     //console.log(form);
     //console.log(this.item);
-    if (form.invalid) {
-      console.log("Not valid");
-      return;
+
+    swal.fire({
+      title: "Wait",
+      text: "Saving Info",
+      type: "info",
+      allowOutsideClick: false
+    });
+    swal.showLoading();
+
+    let petition: Observable<any>;
+
+    if (this.item.id) {
+      petition = this.itemsService.updateItem(this.item);
+    } else {
+      petition = this.itemsService.createItem(this.item);
     }
+
+    petition.subscribe(reply => {
+      swal.fire({
+        title: this.item.name,
+        text: "Updated correctly",
+        type: "success"
+      });
+    });
   }
 }

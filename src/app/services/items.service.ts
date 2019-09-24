@@ -31,6 +31,10 @@ export class ItemsService {
     return this.http.get(`${this.url}/items.json`).pipe(map(this.createArray));
   }
 
+  getItem(id: string) {
+    return this.http.get(`${this.url}/items/${id}.json`);
+  }
+
   private createArray(obj: object) {
     const items: ItemModel[] = [];
 

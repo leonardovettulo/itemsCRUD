@@ -4,6 +4,7 @@ import { NgForm } from "@angular/forms";
 import { ItemsService } from "../../services/items.service";
 import swal from "sweetalert2";
 import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
 
 //Sweet Alert package
 
@@ -13,11 +14,23 @@ import { Observable } from "rxjs";
   styleUrls: ["./item.component.css"]
 })
 export class ItemComponent implements OnInit {
-  item = new ItemModel();
+  item: ItemModel = new ItemModel();
 
-  constructor(private itemsService: ItemsService) {}
+  constructor(
+    private itemsService: ItemsService,
+    private route: ActivatedRoute
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get("id");
+
+    if (id !== "new") {
+      this.itemsService.getItem(id).subscribe((reply: ItemModel) => {
+        this.item = reply;
+        this.item.id = id;
+      });
+    }
+  }
 
   save(form: NgForm) {
     //console.log(form);
